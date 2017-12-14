@@ -8,9 +8,9 @@ const Header = (props) => {
           <div>
             <h1>QUESTIONS</h1>
             <div>
-              <input type="radio" name="my_shelf" id="my_shelf"/>
+              <input type="radio" name="category" id="my_shelf"/>
               <label htmlFor="my_shelf"><b>My shelf</b></label>
-              <input type="radio" name="all_q" id="all_q"/>
+              <input type="radio" name="category" id="all_q"/>
               <label htmlFor="all_q"><b>All questions</b></label>
             </div>
           </div>
@@ -18,14 +18,15 @@ const Header = (props) => {
         </fieldset>
 
         <fieldset className={styles.fs2}>
-          <label>Sort by: </label>
+          <label><i>Sort by: </i></label>
           <select name="sort_by">
             <option value="recent">recent</option>
             <option value="newest">newset</option>
             <option value="oldest">oldest</option>
           </select>
-          <input type="text" name="hot" id="hot" value="hot" className="hot"/>
-          <input type="submit" value="Search"/>
+          <span><i>or </i></span>
+          <button className={styles.hot}><b>hot</b></button>
+          <button className={styles.submit}>SEARCH</button>
         </fieldset>
       </form>
     </header>
