@@ -4,25 +4,24 @@
     font-family Varta
     form
       margin 0 auto
-      display flex
-      width 90%
-      .fs1
-        flex 2
+      .fs1, .fs2
         border none
-        margin: 0 25px 0 0
+        padding 10px 0 0 0
+      .fs1
         > div
-          display flex
-          justify-content space-between
-          align-items center
-        label
-          margin 0 10px 0 10px
+          text-align center
+          h1
+            margin 0.67em 0 0.67em 0
+          > div
+            padding 0 0 10px 0
+            label
+              margin 0 10px 0 2px
       #search
         width 100%
         padding 8px 10px 8px 10px
       .fs2
-        width 20%
+        text-align center
         padding 10px 0 0 0
-        border none
         select
           border none
           font-weight bold
@@ -35,46 +34,29 @@
           border none
           color: #2c45f9
         .submit
+          display block
           border 1px solid #777777
           color #777777
-          margin 10px 0 0 0
+          margin 10px auto 0 auto
           padding 10px
           width 175px
           height 35px
 @media (min-width: 768px)
-    form
-      padding 50px 0 20px 0
+  form
+    display flex
+    .fs1
+      flex 2
+    .fs2
+      margin 0 0 0 10px
+      align-self flex-end
 @media (min-width: 992px)
-    form
-      width 800px
-      .fs1
-        margin: 0 25px 0 0
-        > div
-          padding 0 0 20px 0
-        label
-          margin 0 10px 0 10px
-      #search
-        padding 8px 10px 8px 10px
-      .fs2
-        width 20%
-        padding 10px 0 0 0
-        border none
-        select
-          border none
-          font-weight bold
-          color #777777
-          appearance: none;
-          border-bottom 1px solid #777777
-        .hot, .submit
-          display inline-block
-          background none
-          border none
-          color: #2c45f9
-        .submit
-          border 1px solid #777777
-          color #777777
-          margin 28px 0 0 0
-          padding 10px
-          width 175px
-          height 35px
-
+  form
+    width 800px
+    .fs1
+      > div
+        display flex
+        justify-content space-between
+        align-items center
+    .fs2
+      .submit
+        margin 35px 0 0 0 !important
