@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Question.styl';
+import Tab from './Tab/Tab';
 
 const Question = (props) => {
   return (
@@ -12,7 +13,10 @@ const Question = (props) => {
         </div>
       </div>
       <div className={styles.activities}>
-        <div className={styles.tab}>ActivityTab</div>
+        <div className={styles.tab}>
+          <Tab type="counter"/>
+          <Tab />
+        </div>
         <div className={styles.summary}>
           <p>1 <i>related discussion</i></p>
           <p>8 <i>peers invloved</i></p>
