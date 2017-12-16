@@ -8,6 +8,7 @@ class Questions extends Component {
     return (
       <div className={styles.Questions}>
         <Question />
+        <Question />
       </div>
     )
   }

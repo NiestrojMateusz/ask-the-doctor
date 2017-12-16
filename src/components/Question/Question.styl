@@ -1,9 +1,11 @@
 .Question
   max-width 800px
   margin 0 auto
+  background #fff
+  padding-bottom 20px
   .heading
-    background #e1f2fc
     padding 20px 20px 20px
+    background #e1f2fc
     .logo, div
       display inline-block
       vertical-align middle
@@ -20,6 +22,7 @@
     .title
       color #337ece
   .activities
+    background #fff
     display flex
     justify-content space-between
     height 160px
@@ -31,10 +34,32 @@
       display flex
       flex-direction column
       justify-content space-around
+  .foot
+    display none
 @media (min-width: 768px)
-  .logo
-    width 4em
+  .Question
+    overflow hidden
+    .heading
+      width 77%
+    .logo
+      width 4em
+    .activities
+      float right
+      width 88%
+    .foot
+      display block
+      float left
+      background #e1f2fc
+      width 12%
+      padding-bottom 142px
+      p
+        padding: 5px 0 10px 0
+        font-size 0.8em
+        border-top 1px solid #777
+        display inline
+        color #777
+        position relative
+        top 122px
+        left 25px
 /* wrócić po zrobieniu kart */
-@media (min-width: 992px)
-  .heading
-    width: 77%
+// @media (min-width: 992px)

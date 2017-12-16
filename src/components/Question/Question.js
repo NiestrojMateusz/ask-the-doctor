@@ -48,6 +48,7 @@ class Question extends Component {
             <h2 className={styles.title}>Some question?</h2>
           </div>
         </div>
+        <div className={styles.foot}><p>ASKED</p></div>
         <div className={styles.activities}>
           {tabs}
           <div className={styles.summary}>
