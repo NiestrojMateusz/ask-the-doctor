@@ -4,11 +4,13 @@
   margin 1px 1px 0 0
   display flex
   flex-direction column
-  justify-content space-between
+  justify-content flex-end
   align-items center
   p
     color #777777
   .logo
+    position relative
+    bottom 25%
     border-radius 50%
     margin 20px 20px 0 20px
   .foot
@@ -17,9 +19,19 @@
     border-top 1px solid #777
   .counter
     padding: 50% 0 0 0
+    position relative
+    bottom 32%
     & + .foot
         font-size 1em
         border none
+  .dot
+    display block
+    position relative
+    top 5px
+    width 10px
+    height 10px
+    border-radius 50%
+    background: #5b5b5b
 @media (min-width: 768px)
   .logo
     width 4em
