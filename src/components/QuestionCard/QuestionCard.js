@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import styles from './Question.styl';
+import styles from './QuestionCard.styl';
 import Tab from './Tab/Tab';
 
 class Question extends Component {
 
-  // state = {
-  //   width: window.innerWidth || document.body.clientWidth
-  // }
+  state = {
+    // width: window.innerWidth || document.body.clientWidth
+  }
 
   // componentDidMount() {
   //   window.addEventListener("resize", this.updateDimensions);
@@ -44,7 +44,7 @@ class Question extends Component {
         <div className={styles.heading}>
           <img src="http://via.placeholder.com/50x50" alt="" className={styles.logo}/>
           <div>
-            <p><span className={styles.username}>Nick</span> is asking</p>
+            <p onClick={(id)=>this.props.showModal("1")}><span className={styles.username}>Nick</span> is asking</p>
             <h2 className={styles.title}>Some question?</h2>
           </div>
         </div>
