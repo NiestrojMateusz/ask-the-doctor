@@ -9,10 +9,13 @@ import FullQuestion from './containers/FullQuestion/FullQuestion';
 import UserProfile from './containers/UserProfile/UserProfile';
 import styles from './App.styl';
 
+
+
 class App extends Component {
   state = {
     showModal: false
   }
+
   closeModal = () => {
     this.setState({showModal: false})
   }

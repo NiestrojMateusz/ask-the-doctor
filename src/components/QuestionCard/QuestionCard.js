@@ -1,21 +1,81 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import styles from './QuestionCard.styl';
 import Tab from './Tab/Tab';
+import _ from 'lodash';
 import Votes from '../Comments/Votes/Votes';
 class Question extends Component {
 
+  state = {
+    width: window.innerWidth || document.documentElement.clientWidth
+  }
+  componentWillMount() {
+    this.question = this.getQuestion(this.props.id);
+    this.updateDimensions();
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
+  updateDimensions = () => {
+    let width = window.innerWidth || document.documentElement.clientWidth;
+    this.setState({width: width})
+  }
+
+  getQuestion = (id) => {
+    let question = _.find(this.props.questions, {questionID: id})
+    return question ? question : null
+  }
 
   render() {
-    let tabs,
+    let tabs = [],
         activities,
         details;
 
-    tabs = (
-      <div className={styles.tab}>
-        <Tab type="counter"/>
-        <Tab />
-      </div>
-    )
+    if (this.question.comments.length > 3) {
+      let tabsQuantity;
+
+      if (this.state.width >= 550) {
+        tabsQuantity = 3
+      }
+      if (this.state.width < 550) {
+        tabsQuantity = 1
+      }
+      for (let i = 0; i < tabsQuantity; i++) {
+        let currentComment = this.question.comments[i];
+        tabs.push(
+          <Tab
+            key={`${this.props.id}_${currentComment}`}
+            logo={this.props.logo} />)
+      }
+      tabs.unshift(
+        <Tab
+          key={this.props.id + '_counter'}
+          type="counter"
+          counter={this.question.comments.length - tabsQuantity}/>)
+    } else {
+
+      if (this.state.width < 550) {
+        tabs = this.question.comments.slice(0,2).map(comment => (
+          <Tab
+          logo={this.props.logo}
+          key={comment} />
+        ))
+      } else {
+        tabs = this.question.comments.map(comment => (
+          <Tab
+            logo={this.props.logo}
+            key={comment} />
+        ))
+      }
+    }
+
     activities = (
       <div className={styles.activities}>
         {tabs}
@@ -29,7 +89,7 @@ class Question extends Component {
     details = (
       <div className={styles.details}>
         <p className={styles.questionContent}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium earum sed hic ad incidunt provident quam praesentium necessitatibus! Ipsam dignissimos fugit ratione corporis commodi eius magnam molestiae veritatis pariatur alias?Nesciunt, adipisci quod, ducimus, dolore ipsam expedita aperiam suscipit consequuntur quam provident voluptas? Officiis placeat nisi, expedita temporibus iste incidunt ipsam, mollitia repudiandae omnis eum consequuntur esse porro suscipit quasi!
+          {this.props.content}
         </p>
         <div className={styles.summary}>
           <a href="">unfollow</a>
@@ -44,10 +104,10 @@ class Question extends Component {
           ? [styles.Question, styles.fullQuestion].join(' ')
           : styles.Question} >
         <div className={styles.heading}>
-          <img src="http://via.placeholder.com/50x50" alt="" className={styles.logo}/>
+          <img src={this.props.logo} alt="" className={styles.logo}/>
           <div>
-            <p onClick={(id)=>this.props.showModal("1")}><span className={styles.username}>Nick</span> is asking</p>
-            <h2 className={styles.title}>Some question?</h2>
+            <p onClick={(id)=>this.props.showModal("1")}><span className={styles.username}>{this.props.username}</span> is asking</p>
+            <h2 className={styles.title}>{this.props.title}</h2>
           </div>
         </div>
         {this.props.fullQuestion
@@ -59,4 +119,10 @@ class Question extends Component {
     );
   }
 }
-export default Question;
+
+const mapStateToProps = state => {
+  return {
+    questions: state.questions
+  }
+}
+export default connect(mapStateToProps)(Question);

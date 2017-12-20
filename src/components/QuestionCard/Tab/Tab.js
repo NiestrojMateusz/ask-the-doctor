@@ -6,7 +6,7 @@ const Tab = (props) => {
   let dot = (<div className={styles.dot}></div>);
   let tab = (
     <div className={styles.Tab}>
-      <img src="http://via.placeholder.com/50x50" alt="" className={styles.logo}/>
+      <img src={props.logo} alt="" className={styles.logo}/>
       <p className={styles.foot}>COMMENTED</p>
       {dot}
     </div>
@@ -15,7 +15,7 @@ const Tab = (props) => {
   if (props.type === 'counter') {
     tab = (
         <div className={[styles.Tab, styles.counterTab].join(' ')}>
-          <p className={styles.counter}>6</p>
+          <p className={styles.counter}>{props.counter}</p>
           <p className={styles.foot}><i>more activities</i></p>
           {dot}
         </div>
