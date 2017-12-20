@@ -4,7 +4,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 /* eslint-enable */
 import Aux from './hoc/Auxiliary/Auxiliary';
 import Modal from './components/UI/Modal/Modal'
-import Header from './components/UI/Header/Header';
 import Questions from './containers/Questions/Questions';
 import FullQuestion from './containers/FullQuestion/FullQuestion';
 import UserProfile from './containers/UserProfile/UserProfile';
@@ -36,7 +35,6 @@ class App extends Component {
             modalClosed={this.closeModal}>
             <UserProfile />
           </Modal>
-          <Header />
           {routes}
         </Aux>
       </div>

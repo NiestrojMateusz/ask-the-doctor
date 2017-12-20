@@ -1,0 +1,30 @@
+.appLogo
+    width 40px
+    height 40px
+    position relative
+    border-radius 50%
+    border 1px solid #cbcbcb
+    cursor pointer
+    background transprent
+.before,
+.after
+    content ''
+    position absolute
+    width 20px
+    height 1px
+    background-color #cbcbcb
+    border-radius 0
+    top 27px
+    -webkit-transition 150ms ease-out
+    -moz-transition 150ms ease-out
+    -o-transition 150ms ease-out
+    transition 150ms ease-out
+    z-index 0
+.before
+    left 5px
+    top 24px
+    transform rotate(45deg)
+.after
+    transform rotate(-35deg)
+    right 12px
+    top 12px

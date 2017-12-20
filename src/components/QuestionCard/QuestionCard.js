@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
 import styles from './QuestionCard.styl';
 import Tab from './Tab/Tab';
-
+import Votes from '../Comments/Votes/Votes';
 class Question extends Component {
 
-  state = {
-    // width: window.innerWidth || document.body.clientWidth
-  }
 
-  // componentDidMount() {
-  //   window.addEventListener("resize", this.updateDimensions);
-  // }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener("resize", this.updateDimensions);
-  // }
-
-  // updateDimensions = () => {
-  //   this.setState({width: window.innerWidth || document.body.clientWidth})
-  // }
   render() {
-    let tabs;
+    let tabs,
+        activities,
+        details;
 
     tabs = (
       <div className={styles.tab}>
@@ -28,19 +16,33 @@ class Question extends Component {
         <Tab />
       </div>
     )
-
-    // if (this.state.width >= 500) {
-    //   tabs = (
-    //     <div className={styles.tab}>
-    //       <Tab />
-    //       <Tab type="counter"/>
-    //       <Tab />
-    //      </div>
-    //   )
-    // }
+    activities = (
+      <div className={styles.activities}>
+        {tabs}
+        <div className={styles.summary}>
+          <p>1 <i>related discussion</i></p>
+          <p>8 <i>peers invloved</i></p>
+          <p>3 <i>conversations</i></p>
+        </div>
+      </div>
+    )
+    details = (
+      <div className={styles.details}>
+        <p className={styles.questionContent}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium earum sed hic ad incidunt provident quam praesentium necessitatibus! Ipsam dignissimos fugit ratione corporis commodi eius magnam molestiae veritatis pariatur alias?Nesciunt, adipisci quod, ducimus, dolore ipsam expedita aperiam suscipit consequuntur quam provident voluptas? Officiis placeat nisi, expedita temporibus iste incidunt ipsam, mollitia repudiandae omnis eum consequuntur esse porro suscipit quasi!
+        </p>
+        <div className={styles.summary}>
+          <a href="">unfollow</a>
+          <Votes />
+        </div>
+      </div>
+    )
 
     return (
-      <div className={styles.Question}>
+      <div
+        className={this.props.fullQuestion
+          ? [styles.Question, styles.fullQuestion].join(' ')
+          : styles.Question} >
         <div className={styles.heading}>
           <img src="http://via.placeholder.com/50x50" alt="" className={styles.logo}/>
           <div>
@@ -48,15 +50,11 @@ class Question extends Component {
             <h2 className={styles.title}>Some question?</h2>
           </div>
         </div>
-        <div className={styles.foot}><p>ASKED</p></div>
-        <div className={styles.activities}>
-          {tabs}
-          <div className={styles.summary}>
-            <p>1 <i>related discussion</i></p>
-            <p>8 <i>peers invloved</i></p>
-            <p>3 <i>conversations</i></p>
-          </div>
-        </div>
+        {this.props.fullQuestion
+          ? details
+          : activities
+        }
+        <p className={styles.foot}>{this.props.fullQuestion ? null : "ASKED"}</p>
       </div>
     );
   }

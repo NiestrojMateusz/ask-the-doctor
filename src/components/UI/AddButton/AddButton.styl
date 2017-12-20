@@ -1,0 +1,30 @@
+.circle
+    display inline-block
+    width 30px
+    height 30px
+    position relative
+    border-radius 50%
+    border 2px solid #fff
+    cursor pointer
+    background #337ece
+    top 4px
+    &:hover
+        // border 1px solid #717171
+        padding-bottom 1px
+        transform: scale(1.2);
+  .before,
+  .after
+      content ''
+      position absolute
+      width 20px
+      height 2px
+      background-color white
+      border-radius 0
+      top 11px
+      transition 150ms ease-out
+      z-index 0
+  .before
+      left 3px
+  .after
+      transform rotate(-90deg)
+      right 3px

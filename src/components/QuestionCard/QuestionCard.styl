@@ -3,6 +3,7 @@
   margin 0 auto
   background #fff
   padding-bottom 20px
+  border-bottom 1px solid #cecece
   .heading
     padding 20px 20px 20px
     background #e1f2fc
@@ -36,6 +37,12 @@
       justify-content space-around
   .foot
     display none
+  .details
+    padding 10px
+    .summary
+      display flex
+      justify-content space-between
+      padding 20px 30px 0 0
 @media (min-width: 768px)
   .Question
     overflow hidden
@@ -44,22 +51,36 @@
     .logo
       width 4em
     .activities
-      float right
-      width 88%
+      border-left 96px solid #e1f2fc
+    .details
+      display flex
+      .questionContent
+        width 75%
+      .summary
+        display block
+        padding-top 0
     .foot
-      display block
-      float left
-      background #e1f2fc
-      width 12%
-      padding-bottom 142px
-      p
-        padding: 5px 0 10px 0
-        font-size 0.8em
-        border-top 1px solid #777
-        display inline
-        color #777
+      display inline
+      padding: 5px 0 10px 0
+      font-size 0.8em
+      border-top 1px solid #777
+      color #777
+      position relative
+      bottom 37px
+      left 25px
+  .fullQuestion
+    padding-bottom 0
+    .heading
+      width 100%
+    .details
+      border-left 96px solid #e1f2fc
+      .questionContent
+        padding 0 10px 20px 0
+        width 80%
+    .summary
+      a
         position relative
-        top 122px
-        left 25px
+        bottom 70px
+
 /* wrócić po zrobieniu kart */
 // @media (min-width: 992px)

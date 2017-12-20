@@ -14,7 +14,7 @@ const Tab = (props) => {
 
   if (props.type === 'counter') {
     tab = (
-        <div className={styles.Tab}>
+        <div className={[styles.Tab, styles.counterTab].join(' ')}>
           <p className={styles.counter}>6</p>
           <p className={styles.foot}><i>more activities</i></p>
           {dot}
