@@ -23,14 +23,18 @@ class Comments extends Component {
             user={user}
             key={`${comment.commentID}_${generateRandomInt(1, 500)}`}
             replyComment={true}
-            content={comment.content} />
+            content={comment.content}
+            votes={comment.votes}
+            commentID={comment.commentID}/>
         )
       }
       return (
         <Comment
           user={user}
           key={`${comment.commentID}_${generateRandomInt(1, 500)}`}
-          content={comment.content}/>
+          content={comment.content}
+          votes={comment.votes}
+          commentID={comment.commentID}/>
       )
     })
 

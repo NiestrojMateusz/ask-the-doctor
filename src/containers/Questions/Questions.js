@@ -17,12 +17,21 @@ class Questions extends Component {
     return user ? user : null
   }
 
-  loadItems = () => {
+  loadItems = (page) => {
     this.props.onLoadingMoreQuestions();
   }
 
-  sort = (e) => {
+  handleSort = (e) => {
     this.props.onSortChange(e.target.value);
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onSubmit();
+  }
+
+  handleInputChange = (e) => {
+    this.props.onInputUpdate(e.target.value);
   }
 
   render () {
@@ -35,15 +44,17 @@ class Questions extends Component {
           username={user.username}
           logo={user.avatar}
           title={question.title}
-          showModal={this.props.showModal}
           id={question.questionID}
-          date={question.created_at}/>
+          date={question.created_at}
+          />
       )
   })
     return (
       <Aux>
         <Header
-          sortChange={this.sort}
+          sortChange={this.handleSort}
+          submit={this.handleSubmit}
+          inputChange={this.handleInputChange}
         />
         <InfiniteScroll
           pageStart={0}
@@ -64,14 +75,17 @@ const mapStateToProps = state => {
     questions: state.questions,
     users: state.users,
     comments: state.comments,
-    hasMore: state.hasMoreItems
+    hasMore: state.hasMoreItems,
+    searchInput: state.searchInputValue
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onLoadingMoreQuestions: () => dispatch({type: actionTypes.LOAD_MORE}),
-    onSortChange: (method) => dispatch({type: actionTypes.SORT, method: method})
+    onSortChange: (method) => dispatch({type: actionTypes.SORT, method: method}),
+    onSubmit: () => dispatch({type: actionTypes.SEARCH_SUBMIT}),
+    onInputUpdate: (value) => dispatch({type: actionTypes.UPDATE_INPUT,value: value})
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Questions);

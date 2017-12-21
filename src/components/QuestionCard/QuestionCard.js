@@ -6,6 +6,7 @@ import styles from './QuestionCard.styl';
 import Tab from './Tab/Tab';
 import Votes from '../Comments/Votes/Votes';
 import {getData, generateRandomInt} from '../../shared/utilities';
+import * as actionTypes from '../../store/actionTypes';
 
 class Question extends Component {
 
@@ -13,9 +14,6 @@ class Question extends Component {
     width: window.innerWidth || document.documentElement.clientWidth
   }
   componentWillMount() {
-    // this.question = this.getQuestion(this.props.id);
-
-    // console.log(this.props.questions)
     this.question = getData(this.props.questions, "questionID", this.props.id);
     this.updateDimensions();
   }
@@ -37,6 +35,10 @@ class Question extends Component {
     let userID = getData(this.props.comments, "commentID", commentID).userID
     let user = getData(this.props.users, "userID", userID);
     return user.avatar
+  }
+
+  handleUsernameClick = (userID) => {
+    this.props.onUsernameClick(userID);
   }
 
   render() {
@@ -99,7 +101,7 @@ class Question extends Component {
         </p>
         <div className={styles.summary}>
           <a href="">unfollow</a>
-          <Votes />
+          <Votes votes={this.question.votes} id={this.question.questionID} type="question"/>
         </div>
       </div>
     )
@@ -112,7 +114,7 @@ class Question extends Component {
         <div className={styles.heading}>
           <img src={this.props.logo} alt="" className={styles.logo}/>
           <div>
-            <p onClick={(id)=>this.props.showModal("1")}><span className={styles.username}>{this.props.username}</span> is asking</p>
+            <p onClick={(userID) => this.handleUsernameClick(this.question.userID)}><span className={styles.username}>{this.props.username}</span> is asking</p>
             <Link
               to={{
                   pathname:`/question/${this.props.id}`,
@@ -140,4 +142,10 @@ const mapStateToProps = state => {
     users: state.users
   }
 }
-export default connect(mapStateToProps)(Question);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onUsernameClick: (userID) => dispatch({type: actionTypes.USERNAME_CLICK, userID: userID})
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Question);

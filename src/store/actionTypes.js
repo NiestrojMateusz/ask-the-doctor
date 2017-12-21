@@ -1,3 +1,9 @@
 export const LOAD_MORE = "LOAD_MORE";
 export const SORT = "SORT";
 export const FIRST_LOADING = "FIRST_LOADING";
+export const SEARCH_SUBMIT = "SEARCH_SUBMIT";
+export const UPDATE_INPUT = "UPDATE_INPUT";
+export const USERNAME_CLICK = "USERNAME_CLICK";
+export const MODAL_CLICK = "MODAL_CLICK";
+export const ADD_VOTE = "ADD_VOTE"
+export const SUBTRACT_VOTE = "SUBTRACT_VOTE"

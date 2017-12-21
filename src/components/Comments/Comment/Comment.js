@@ -28,7 +28,7 @@ const Comment = props => (
         </p>
       </div>
       <div className={styles.votes}>
-        <Votes />
+        <Votes votes={props.votes} id={props.commentID} type="comment"/>
       </div>
     </div>
   </div>

@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 import styles from './UserProfile.styl'
 
 class UserProfile extends Component {
+
   render () {
     return (
       <div className={ styles.UserProfile }>
         <div className={ styles.heading }>
-          <img src="http://via.placeholder.com/50x50" alt="" className={ styles.logo }/>
-          <h2 className={ styles.username }>User Nick</h2>
+          <img src={this.props.currentUser.avatar} alt="" className={ styles.logo }/>
+          <h2 className={ styles.username }>{this.props.currentUser.username}</h2>
           <div className={ styles.userDetails }>
             <div>
               <h4>MEMBER FOR</h4>
@@ -38,22 +41,22 @@ class UserProfile extends Component {
             <h4>WHO JOINED THE PLATFORM THAT SAME PERIOD</h4>
             <ul>
               <li>
-                <img src="http://via.placeholder.com/50x50" alt="" className={styles.logo}/>
+                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/rpatey/128.jpg" alt="" className={styles.logo}/>
                 <a href="">S.E.N Waweru</a>
               </li>
               <li>
-                <img src="http://via.placeholder.com/50x50" alt="" className={ styles.logo }/>
+                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jghyllebert/128.jpg" alt="" className={ styles.logo }/>
                 <a href="">Patricia</a>
               </li>
               <li>
-                <img src="http://via.placeholder.com/50x50" alt="" className={ styles.logo }/>
+                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/iamgarth/128.jpg" alt="" className={ styles.logo }/>
                 <a href="">Joseph Aluoch</a>
               </li>
             </ul>
           </section>
           <section className={ styles.hotDisc }>
             <h4>THE HOTTEST DISCUSSION THESE DAYS</h4>
-            <img src="http://via.placeholder.com/50x50" alt="" className={ styles.logo }/>
+            <img src="https://s3.amazonaws.com/uifaces/faces/twitter/travishines/128.jpg" alt="" className={ styles.logo }/>
             <a href="">Andrew</a><span> FOUND THE GUARDIAN ARTICLE</span>
             <a className={ styles.title } href="">Vegan diet to stop diabetes progress</a>
             <ul className={ styles.summary }>
@@ -68,4 +71,12 @@ class UserProfile extends Component {
     )
   }
 }
-export default UserProfile;
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(UserProfile);
+
