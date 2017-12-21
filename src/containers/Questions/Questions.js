@@ -21,6 +21,10 @@ class Questions extends Component {
     this.props.onLoadingMoreQuestions();
   }
 
+  sort = (e) => {
+    this.props.onSortChange(e.target.value);
+  }
+
   render () {
     let questions = this.props.questions.map(question => {
       // let user = this.getUser(question.userID)
@@ -32,12 +36,15 @@ class Questions extends Component {
           logo={user.avatar}
           title={question.title}
           showModal={this.props.showModal}
-          id={question.questionID}/>
+          id={question.questionID}
+          date={question.created_at}/>
       )
   })
     return (
       <Aux>
-        <Header />
+        <Header
+          sortChange={this.sort}
+        />
         <InfiniteScroll
           pageStart={0}
           loadMore={this.loadItems}
@@ -63,7 +70,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoadingMoreQuestions: () => dispatch({type: actionTypes.LOAD_MORE})
+    onLoadingMoreQuestions: () => dispatch({type: actionTypes.LOAD_MORE}),
+    onSortChange: (method) => dispatch({type: actionTypes.SORT, method: method})
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Questions);

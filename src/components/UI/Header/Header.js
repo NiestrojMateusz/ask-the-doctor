@@ -22,13 +22,13 @@ const Header = (props) => {
 
       <fieldset className={styles.fs2}>
         <label><i>Sort by: </i></label>
-        <select name="sort_by">
+        <select name="sort_by" onChange={props.sortChange}>
           <option value="recent">recent</option>
           <option value="newest">newset</option>
           <option value="oldest">oldest</option>
         </select>
         <span><i>or </i></span>
-        <button className={styles.hot}><b>hot</b></button>
+        <p className={styles.hot}><b>hot</b></p>
         <button className={styles.submit}>SEARCH</button>
       </fieldset>
     </form>
