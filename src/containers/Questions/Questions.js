@@ -6,6 +6,7 @@ import styles from './Questions.styl';
 import Question from '../../components/QuestionCard/QuestionCard';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Header from '../../components/UI/Header/Header';
+import { getData } from '../../shared/utilities';
 
 class Questions extends Component {
 
@@ -16,7 +17,8 @@ class Questions extends Component {
 
   render () {
     let questions = this.props.questions.map(question => {
-      let user = this.getUser(question.userID)
+      // let user = this.getUser(question.userID)
+      let user = getData(this.props.users, 'userID', question.userID)
       return (
         <Question
           key={question.questionID}

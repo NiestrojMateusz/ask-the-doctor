@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import styles from './QuestionCard.styl';
 import Tab from './Tab/Tab';
-import _ from 'lodash';
 import Votes from '../Comments/Votes/Votes';
+import {getData, generateRandomInt} from '../../shared/utilities';
+
 class Question extends Component {
 
   state = {
     width: window.innerWidth || document.documentElement.clientWidth
   }
   componentWillMount() {
-    this.question = this.getQuestion(this.props.id);
+    // this.question = this.getQuestion(this.props.id);
+
+    // console.log(this.props.questions)
+    this.question = getData(this.props.questions, "questionID", this.props.id);
     this.updateDimensions();
   }
 
@@ -28,9 +33,10 @@ class Question extends Component {
     this.setState({width: width})
   }
 
-  getQuestion = (id) => {
-    let question = _.find(this.props.questions, {questionID: id})
-    return question ? question : null
+  getLogo = (commentID) => {
+    let userID = getData(this.props.comments, "commentID", commentID).userID
+    let user = getData(this.props.users, "userID", userID);
+    return user.avatar
   }
 
   render() {
@@ -51,8 +57,8 @@ class Question extends Component {
         let currentComment = this.question.comments[i];
         tabs.push(
           <Tab
-            key={`${this.props.id}_${currentComment}`}
-            logo={this.props.logo} />)
+            key={`${this.props.id}_${currentComment}` + generateRandomInt(1, 1000)}
+            logo={this.getLogo(currentComment)} />)
       }
       tabs.unshift(
         <Tab
@@ -65,13 +71,13 @@ class Question extends Component {
         tabs = this.question.comments.slice(0,2).map(comment => (
           <Tab
           logo={this.props.logo}
-          key={comment} />
+          key={`${this.props.id}_${comment.commentID}` + generateRandomInt(1, 1000)} />
         ))
       } else {
         tabs = this.question.comments.map(comment => (
           <Tab
             logo={this.props.logo}
-            key={comment} />
+            key={`${this.props.id}_${comment.commentID}` + generateRandomInt(1, 1000)} />
         ))
       }
     }
@@ -107,7 +113,14 @@ class Question extends Component {
           <img src={this.props.logo} alt="" className={styles.logo}/>
           <div>
             <p onClick={(id)=>this.props.showModal("1")}><span className={styles.username}>{this.props.username}</span> is asking</p>
-            <h2 className={styles.title}>{this.props.title}</h2>
+            <Link
+              to={{
+                  pathname:`/question/${this.props.id}`,
+                  search: `?userID=${this.question.userID}`
+                }
+              }
+              className={styles.title}>{this.props.title}
+            </Link>
           </div>
         </div>
         {this.props.fullQuestion
@@ -122,7 +135,9 @@ class Question extends Component {
 
 const mapStateToProps = state => {
   return {
-    questions: state.questions
+    questions: state.questions,
+    comments: state.comments,
+    users: state.users
   }
 }
 export default connect(mapStateToProps)(Question);

@@ -25,7 +25,6 @@ const Tab = (props) => {
   return (
     <Aux>
       {tab}
-
     </Aux>
   );
 }

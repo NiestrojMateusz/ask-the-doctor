@@ -6,7 +6,7 @@ const Comment = props => (
   <div className={props.replyComment ? styles.Reply : styles.Comment}>
     <div className={styles.logoContainer}>
       <img
-        src="http://via.placeholder.com/50x50"
+        src={props.user.avatar}
         alt=" "
         className={styles.logo}
       />
@@ -16,7 +16,7 @@ const Comment = props => (
         <a
           href=""
           className={styles.username}>
-          David
+          {props.user.username}
         </a>
         <p>
           COMMENTED IT <span>yesterday</span>
@@ -24,13 +24,7 @@ const Comment = props => (
       </div>
       <div className={styles.content}>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima illum
-          explicabo voluptate maxime. Quos laudantium ullam delectus inventore
-          eos, enim adipisci incidunt labore distinctio ab, earum iste rerum
-          minima corporis! Lorem ipsum dolor sit amet consectetur, adipisicing
-          elit. Hic quo cumque eligendi nisi ut quas velit libero recusandae
-          repellat ex! Eligendi expedita iste necessitatibus totam iusto soluta
-          laudantium enim aliquid?
+          {props.content}
         </p>
       </div>
       <div className={styles.votes}>

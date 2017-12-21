@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 /* eslint-enable */
 import Aux from './hoc/Auxiliary/Auxiliary';
 import Modal from './components/UI/Modal/Modal'
@@ -27,7 +27,7 @@ class App extends Component {
     let routes =(
       <Switch>
         <Route path="/" exact render={() => <Questions showModal={this.showModal}/>} />
-        <Route path="/question" component={FullQuestion} />
+        <Route path="/question/:id" component={FullQuestion} />
       </Switch>
     )
     return (
@@ -45,4 +45,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
