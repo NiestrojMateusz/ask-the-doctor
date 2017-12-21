@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import styles from './UserProfile.styl'
+import badges from '../../assets/images/badges.png'
+import leftArrow from '../../assets/images/arrow-left.png';
+import rightArrow from '../../assets/images/arrow-right.png';
 
 class UserProfile extends Component {
 
@@ -22,12 +25,18 @@ class UserProfile extends Component {
             </div>
             <div>
               <h4>ACTIVITY LEVEL</h4>
-              <p>3</p>
+              <img src={badges} alt="badges"/>
             </div>
           </div>
         </div>
         <main>
-          <h1>How it all started</h1>
+
+          <h1>
+            <img src={leftArrow} alt="arrow-left" className={styles.arrow}/>
+            How it all started
+            <img src={rightArrow} alt="arrow-right" className={styles.arrow}/>
+          </h1>
+
           <section>
             <h4>THAT'S WHERE WE HAVE BEEN THESE 5 MONTHS AGO</h4>
             <ul className={ styles.stats }>
