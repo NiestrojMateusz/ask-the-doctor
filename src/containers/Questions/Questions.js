@@ -2,17 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import styles from './Questions.styl';
+import * as actionTypes from '../../store/actionTypes';
 
 import Question from '../../components/QuestionCard/QuestionCard';
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Header from '../../components/UI/Header/Header';
 import { getData } from '../../shared/utilities';
+import InfiniteScroll from 'react-infinite-scroller';
 
 class Questions extends Component {
 
   getUser = (id) => {
     let user = _.find(this.props.users, {userId: id});
     return user ? user : null
+  }
+
+  loadItems = () => {
+    this.props.onLoadingMoreQuestions();
   }
 
   render () {
@@ -32,9 +38,15 @@ class Questions extends Component {
     return (
       <Aux>
         <Header />
-        <div className={styles.Questions}>
-          {questions}
-        </div>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={this.loadItems}
+          hasMore={this.props.hasMore}
+        >
+          <div className={styles.Questions}>
+            {questions}
+          </div>
+        </InfiniteScroll>
       </Aux>
     )
   }
@@ -44,7 +56,14 @@ const mapStateToProps = state => {
   return {
     questions: state.questions,
     users: state.users,
-    comments: state.comments
+    comments: state.comments,
+    hasMore: state.hasMoreItems
   }
 }
-export default connect(mapStateToProps)(Questions);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLoadingMoreQuestions: () => dispatch({type: actionTypes.LOAD_MORE})
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Questions);

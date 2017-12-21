@@ -1,1 +1,1 @@
-export const GET_QUESTIONS = "GET_QUESTIONS";
+export const LOAD_MORE = "LOAD_MORE";
